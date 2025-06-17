@@ -1,0 +1,33 @@
+{
+    "appRunningConfig": {
+        "loops": 1000,
+        "loopsDelay": {
+            "min": 1000,
+            "max": 5000
+        }
+    },
+    "template": {
+        "type": "EVENT",
+        "body": {
+            "id": "84b46072-06e0-4f1f-8200-00cfecafcdc9",
+            "time": 1747317998688,
+            "type": "LOGIN",
+            "realmId": "9fc01367-0738-490d-ac4f-66dadc2063e6",
+            "realmName": "solofertil",
+            "clientId": "sisgap",
+            "userId": "aedc41ec-f34a-4ef5-8751-1f73b24abb4c",
+            "sessionId": "13c69d0b-eb0f-4f1b-9b9f-a019f2f39981",
+            "ipAddress": "179.216.245.141",
+            "error": null,
+            "details": {
+                "auth_method": "openid-connect",
+                "auth_type": "code",
+                "redirect_uri": "https://sso-client.domain.com/#!/",
+                "consent": "no_consent_required",
+                "code_id": "13c69d0b-eb0f-4f1b-9b9f-a019f2f39981",
+                "username": "exemple@domain.com"
+            }
+        },
+        "representation": null
+    }
+}
