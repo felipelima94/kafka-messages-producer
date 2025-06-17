@@ -5,11 +5,7 @@ import com.felipedelima.services.KafkaProducerService;
 import com.felipedelima.services.ReadTemplate;
 import com.felipedelima.services.UUIDGen;
 
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Hello world!
@@ -17,15 +13,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class App 
 {
-    private static final ReadTemplate readTemplate = new ReadTemplate("demo-template.json");
+    private static final ReadTemplate readTemplate = new ReadTemplate(AppConfig.getTempladeUri());
     private static final KafkaProducerService kafkaProducerService = new KafkaProducerService();
     public static void main( String[] args )
     {
         Integer loop = readTemplate.getLoops();
+        System.out.printf("Seeding topic: %s\n", AppConfig.getKafkaTopic());
         while (loop > 0) {
             int delay = getRandomBetween(readTemplate.getloopDeleyMin(), readTemplate.getloopDeleyMax());
             kafkaProducerService.sendMessage(AppConfig.getKafkaTopic(), UUIDGen.generateUUID(), getTemplate());
-            System.out.println("Loop: " + loop + " - Delay: " + delay + "ms");
+            System.out.printf("Loop: %d - Delay: %dms\n", loop, delay);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {

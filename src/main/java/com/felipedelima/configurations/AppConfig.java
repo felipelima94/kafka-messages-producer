@@ -17,10 +17,17 @@ public class AppConfig {
     }
 
     public static String getKafkaServer() {
-        return (String) yamlProps.get("kafka-server");
+        String osEnv = System.getenv("KAFKA_BROKER");
+        return osEnv == null ? yamlProps.get("kafka-broker").toString() : osEnv;
     }
 
     public static String getKafkaTopic() {
-        return (String) yamlProps.get("kafka-topic");
+        String osEnv = System.getenv("KAFKA_TOPIC");
+        return osEnv == null ? yamlProps.get("kafka-topic").toString() : osEnv;
+    }
+
+    public static String getTempladeUri() {
+        String osEnv = System.getenv("TEMPLATE_URI");
+        return osEnv == null ? yamlProps.get("template-uri").toString() : osEnv;
     }
 }
