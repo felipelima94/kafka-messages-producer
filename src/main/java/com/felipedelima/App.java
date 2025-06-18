@@ -17,18 +17,19 @@ public class App
     private static final KafkaProducerService kafkaProducerService = new KafkaProducerService();
     public static void main( String[] args )
     {
-        Integer loop = readTemplate.getLoops();
+        int loops = readTemplate.getLoops();
+        int loopCurrent = 0;
         System.out.printf("Seeding topic: %s\n", AppConfig.getKafkaTopic());
-        while (loop > 0) {
+        while (loops > loopCurrent || loops == 0) {
             int delay = getRandomBetween(readTemplate.getloopDeleyMin(), readTemplate.getloopDeleyMax());
             kafkaProducerService.sendMessage(AppConfig.getKafkaTopic(), UUIDGen.generateUUID(), getTemplate());
-            System.out.printf("Loop: %d - Delay: %dms\n", loop, delay);
+            System.out.printf("Loop: %d - Delay: %dms\n", loopCurrent+1, delay);
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            loop--;
+            loopCurrent++;
         }
     }
 
