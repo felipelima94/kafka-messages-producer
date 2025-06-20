@@ -1,9 +1,11 @@
 package com.felipedelima;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.felipedelima.configurations.AppConfig;
 import com.felipedelima.services.KafkaProducerService;
 import com.felipedelima.services.ReadTemplate;
 import com.felipedelima.services.UUIDGen;
+import com.felipedelima.services.VariableHandler;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -34,7 +36,9 @@ public class App
     }
 
     public static String getTemplate() {
-        return readTemplate.getMessageTemplate("template").toString();
+        JsonNode template = readTemplate.getMessageTemplate("template");
+        template = VariableHandler.replaceVars(template);
+        return template.toString();
     }
 
     public static int getRandomBetween(int min, int max) {
